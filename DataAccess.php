@@ -19,10 +19,10 @@
 // Definitions
 //-------------------------------------------------------------------
 
-define("SERVER_CONNECTION", "localhost");
-define("USER_CONNECTION", "usuario");
-define("PSW_CONNECTION", "contraseña");
-define("BBDD_CONNECTION", "baserdedatos");
+define("SERVER_CONNECTION", "server");
+define("USER_CONNECTION", "user");
+define("PSW_CONNECTION", "password");
+define("BBDD_CONNECTION", "bbdd");
 define("BBDD_COLLATION", "utf8");
 
 //-------------------------------------------------------------------
