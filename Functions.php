@@ -1,3 +1,5 @@
+<?php
+
 /**
  * @file Functions.php
  * @version 1.0
@@ -42,3 +44,4 @@ function generateRandomString($length = 10) {
     return $randomString; 
 
 } 
+?>
