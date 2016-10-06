@@ -123,7 +123,7 @@ class LeerEmails {
     // Marca como leido el mensaje indicado
     function marcar_como_leido ($numero_email){
 
-        return imap_setflag_full($this->inbox, $numero_email, 'SEEN');
+        return imap_setflag_full($this->inbox, $numero_email, '\Seen');
 
     } // function marcar_como_leido
 
