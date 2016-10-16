@@ -10,7 +10,7 @@
  */
 
 // Recorta un texto sin recortar palabras
-function cortarTexto($texto, $numMaxCaract){
+function cortarTexto ($texto, $numMaxCaract){
     
     // Si el tamaño del texto no excede el numero maximo de caracteres
     if(strlen($texto) <  $numMaxCaract)
@@ -43,7 +43,7 @@ function cortarTexto($texto, $numMaxCaract){
 } // function cortarTexto
 
 // Genera una cadena aleatorea, por defecto de 10
-function cadenaAleatorea($longitud = 10) {
+function cadenaAleatorea ($longitud = 10) {
 
     $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $cantidadCaracteres = strlen($caracteres);
