@@ -98,7 +98,7 @@ class AccesoDatos {
         $this->bd = new mysqli($servidor, $usuario, $clave, $bd);
         $this->bd->set_charset($codificacion);
 
-    } // function AccesoDatos
+    } // function __construct
 
     // Ejecuta una consulta
     function ejecutar ($sql){
