@@ -41,7 +41,7 @@ class LeerEmails {
     var $limiteFicheros;
 
     // Crea la conexion
-    function LeerEmails ($servidor, $usuario, $clave) {
+    function __construct ($servidor, $usuario, $clave) {
 
         $this->servidor = $servidor;
         $this->usuario = $usuario;
@@ -58,7 +58,7 @@ class LeerEmails {
             return true;
         
         
-    } // function LeerEmails
+    } // function __construct
 
     // Devuelve un array con los datos de los emails
     function traer_emails ($opciones = '') {
