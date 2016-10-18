@@ -93,7 +93,7 @@ class AccesoDatos {
     var $query;
     
     // Crea una conexion a la base de datos
-    function AccesoDatos ($servidor = SERVIDOR, $usuario = USUARIO, $clave = CLAVE, $bd = BASEDEDATOS, $codificacion = CODIFICACION){
+    function __construct ($servidor = SERVIDOR, $usuario = USUARIO, $clave = CLAVE, $bd = BASEDEDATOS, $codificacion = CODIFICACION){
 
         $this->bd = new mysqli($servidor, $usuario, $clave, $bd);
         $this->bd->set_charset($codificacion);
