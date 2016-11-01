@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * @file WooCommerce_Curl.php
+ * @version 1.0
+ * @author noelclm (https://github.com/noelclm)
+ * @date   01-Noviembre-2016
+ * @url    https://github.com/noelclm/libreriasPHP/WooCommerce_Curl.php
+ * @description Funciones para conectarse a un WooCommerce mediante CURL
+ */
+
 // Datos para conectarse al servidor
 define("URL", ""); // URL donde esta la pagina de WooCommerce
 define("CK", ""); // CONSUMER_KEY
