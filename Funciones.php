@@ -1,15 +1,20 @@
 <?php
 
 /**
- * @file Funciones.php
+ * Funciones utiles en PHP
+ *
  * @version 1.0
  * @author noelclm (https://github.com/noelclm)
- * @date   29-Septiembre-2016
- * @url    https://github.com/noelclm/libreriasPHP/Funciones.php
- * @description Funciones utiles en PHP
+ * @url https://github.com/noelclm/libreriasPHP/Funciones.php
  */
 
-// Recorta un texto sin recortar palabras
+/**
+ * Recorta un texto sin recortar palabras
+ *
+ * @param string $texto Texto que se quiere recortar
+ * @param int $numMaxCaract Numero maximo de caracteres
+ * @return string Texto recortado
+ */
 function cortarTexto ($texto, $numMaxCaract){
     
     // Si el tamaño del texto no excede el numero maximo de caracteres
@@ -42,7 +47,12 @@ function cortarTexto ($texto, $numMaxCaract){
     
 } // function cortarTexto
 
-// Genera una cadena aleatorea, por defecto de 10
+/**
+ * Genera una cadena aleatorea de alfanumerica
+ *
+ * @param int $longitud Longitud de la cadena, es opcional, por defecto es de 10
+ * @return string Cadena aleatorea
+ */
 function cadenaAleatorea ($longitud = 10) {
 
     $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
