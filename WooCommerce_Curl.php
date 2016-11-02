@@ -3,7 +3,6 @@
 /**
  * Funciones para conectarse a un WooCommerce mediante CURL
  *
- * @file WooCommerce_Curl.php
  * @version 1.1
  * @author noelclm (https://github.com/noelclm)
  * @link https://github.com/noelclm/libreriasPHP/WooCommerce_Curl.php
