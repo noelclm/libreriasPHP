@@ -110,12 +110,16 @@ class AccesoDatos {
 
     /**
      * Objeto de la conexión
+     * @var object
+     * @access protected
      */
-    var $bd;
+    protected $bd;
     /**
      * Objeto devuelto tras realizar la ejecución de una query
+     * @var object
+     * @access protected
      */
-    var $query;
+    protected $query;
     
     /**
      * Constructor
