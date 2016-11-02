@@ -13,15 +13,15 @@
 
 $categorias = obtenerWooCommerce("products/categories");
 
-productos = obtenerWooCommerce("products");
+$productos = obtenerWooCommerce("products");
 
-$data = array( "product_category" => array("name"=>$nombre));
+$datos = array( "product_category" => array("name"=>$nombre));
 actualizarWooCommerce("products/categories",$id,$datos);
 
 borrarWooCommerce("products/categories",$id);
 
-$data = array( "product" => array( 'title' => "Titulo", 'description' => "Descripcion", 'sku' => Referencia , 'categories' => array( 'id' => $idCategoria)));
-createWooCommerce("products",$data);
+$datos = array( "product" => array( 'title' => "Titulo", 'description' => "Descripcion", 'sku' => Referencia , 'categories' => array( 'id' => $idCategoria)));
+createWooCommerce("products",$datos);
 
 */
 
