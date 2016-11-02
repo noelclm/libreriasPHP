@@ -1,12 +1,13 @@
 <?php
 
 /**
+ * Funciones para conectarse a un WooCommerce mediante CURL
+ *
  * @file WooCommerce_Curl.php
  * @version 1.0
  * @author noelclm (https://github.com/noelclm)
- * @date   01-Noviembre-2016
- * @url    https://github.com/noelclm/libreriasPHP/WooCommerce_Curl.php
- * @description Funciones para conectarse a un WooCommerce mediante CURL
+ * @date 01-Noviembre-2016
+ * @link URL https://github.com/noelclm/libreriasPHP/WooCommerce_Curl.php
  */
 
 /*
@@ -35,9 +36,10 @@ define("SSL_VERIFYHOST", false);
 define("RETURNTRANSFER", true);
 
 /**
+ * Obtiene los datos de la ruta del WooCommerce que indique
+ *
  * @param string $ruta Ruta del WooCommerce
  * @return object Objeto con la lista de los datos solicitados
- * @description Obtiene los datos de la ruta del WooCommerce que indique
  */
 function obtenerWooCommerce($ruta){
 
@@ -63,10 +65,11 @@ function obtenerWooCommerce($ruta){
 } // obtenerWooCommerce($ruta)
 
 /**
+ * Crea una nueva entrada en la ruta que le indiques con los datos pasados
+ *
  * @param string $ruta Ruta del WooCommerce
  * @param array $datos Datos a insertar
  * @return object El objeto creado
- * @description Crea una nueva entrada en la ruta que le indiques con los datos pasados
  */
 function crearWooCommerce($ruta,$datos){
 
@@ -96,10 +99,11 @@ function crearWooCommerce($ruta,$datos){
 } // crearWooCommerce($ruta,$datos)
 
 /**
+ * Borra la entrada en la ruta indicada 
+ *
  * @param string $ruta Ruta del WooCommerce
  * @param int $id ID del dato a borrar
  * @return object El objeto eliminado
- * @description Borra la entrada en la ruta indicada 
  */
 function borrarWooCommerce($ruta,$id){
 
@@ -125,11 +129,12 @@ function borrarWooCommerce($ruta,$id){
 } // borrarWooCommerce($ruta,$id)
 
 /**
+ * Actualiza la entrada en la ruta indicada
+ *
  * @param string $ruta Ruta del WooCommerce
  * @param int $id ID del dato a actualizar
  * @param array $datos Datos a modificar
  * @return object El objeto modificado
- * @description Actualiza la entrada en la ruta indicada
  */
 function actualizarWooCommerce($ruta,$id,$datos){
 
