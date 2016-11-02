@@ -56,11 +56,17 @@ function cortarTexto ($texto, $numMaxCaract){
 function cadenaAleatorea ($longitud = 10) {
 
     $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $cantidadCaracteres = strlen($caracteres);
-    $cadena = '';
-    
-    for ($i = 0; $i < $longitud; $i++) 
-        $cadena .= $caracteres[rand(0, $cantidadCaracteres - 1)]; 
+    // Iniciamos la semilla de numeros aleatorios y la key
+    srand((double)microtime()*1000000);
+    $cadena = "";
+
+    // Creamos la cadena de N caracteres;
+    for($x=0;$x<$longitud;$x++){
+
+        $aleatorio = rand(0,35);
+        $cadena .=  substr($caracteres, $aleatorio, 1);
+
+    } // for($x=0;$x<$longitud;$x++)
 
     return $cadena; 
     
