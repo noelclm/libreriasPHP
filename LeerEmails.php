@@ -1,12 +1,11 @@
 <?php
 
 /**
- * @file LeerEmails.php
+ * Descargar emails y sus adjuntos mediante IMAP y PHP
+ *
  * @version 1.0
  * @author noelclm (https://github.com/noelclm)
- * @date   06-Octubre-2016
- * @url    https://github.com/noelclm/libreriasPHP/LeerEmails.php
- * @description Descargar emails y sus adjuntos mediante IMAP y PHP
+ * @link https://github.com/noelclm/libreriasPHP/LeerEmails.php
  */
 
 /*
@@ -32,15 +31,58 @@ $imap->cerrar(); // cierra la conexion
 
 class LeerEmails {
     
+    /**
+     * Objeto de la conexión
+     * @var object
+     */
     var $inbox;
+    /**
+     * Direccion del servidor
+     */
     var $servidor;
+    /**
+     * Usuario de la cuenta
+     * @var string
+     */
     var $usuario;
+    /**
+     * Contraseña de la cuenta
+     * @var string
+     */
     var $clave;
+    /**
+     * Criterio para la busqueda de correo
+     * @var string
+     */
     var $criterioBusqueda;
+    /**
+     * Carpeta temporal donde almacenar los adjuntos
+     * @var string
+     */
     var $carpetaTemporal;
+    /**
+     * Limite del tamaño de los ficheros a coger
+     * @var int
+     */
     var $limiteFicheros;
 
-    // Crea la conexion
+    /**
+     * Constructor
+     *
+     * Establece una conexión con el servidor
+     *
+     * @param string $servidor Dirección del servidor
+     * @param string $usuario Usuario del servidor
+     * @param string $clave Contraseña del servidor
+     * @global string $servidor
+     * @global string $usuario
+     * @global string $clave
+     * @global string $criterioBusqueda
+     * @global string $carpetaTemporal
+     * @global int $limiteFicheros
+     * @global objet $inbox
+     * @return mixe True si se ha realizado la conexion correctamente, el error en caso contrario
+     */
     function __construct ($servidor, $usuario, $clave) {
 
         $this->servidor = $servidor;
@@ -60,7 +102,18 @@ class LeerEmails {
         
     } // function __construct
 
-    // Devuelve un array con los datos de los emails
+    /**
+     * Devuelve un array con los datos de los emails
+     *
+     * @param array $opciones Opciones de la busqueda
+     * @param string $usuario Usuario del servidor
+     * @param string $clave Contraseña del servidor
+     * @global string $criterioBusqueda
+     * @global string $carpetaTemporal
+     * @global int $limiteFicheros
+     * @global objet $inbox
+     * @return array Emails que se ha traido del servidor
+     */
     function traer_emails ($opciones = '') {
 
         $arrayEmails = array();
@@ -120,14 +173,26 @@ class LeerEmails {
 
     } // function traer_emails
 
-    // Marca como leido el mensaje indicado
+    /**
+     * Marca como leido el mensaje indicado
+     *
+     * @param int $numero_email Numero del email
+     * @global objet $inbox
+     * @return boolean 
+     */
     function marcar_como_leido ($numero_email){
 
         return imap_setflag_full($this->inbox, $numero_email, '\Seen');
 
     } // function marcar_como_leido
 
-    // Borra el mensaje indicado
+    /**
+     * Borra el mensaje indicado
+     *
+     * @param int $numero_email Numero del email
+     * @global objet $inbox
+     * @return boolean 
+     */
     function borrar_email ($numero_email){
 
         return imap_delete($this->inbox, $numero_email);
@@ -135,6 +200,11 @@ class LeerEmails {
     } // function borrar_email
 
     // Cerrar conexion
+    /**
+     * Cerrar conexion
+     *
+     * @global objet $inbox
+     */
     function cerrar (){
 
         imap_close($this->inbox);
@@ -145,7 +215,14 @@ class LeerEmails {
     //                                 Funciones para usar solo en la clase
     //---------------------------------------------------------------------------------------------------------
 
-    // Se trae los documentos adjuntos
+    /**
+     * Se trae los documentos adjuntos
+     *
+     * @access protected
+     * @param object $estructura Estructura del email
+     * @param int $numero_email Numero del email
+     * @return array Informacion de los adjuntos
+     */
     protected function traer_adjuntos ($estructura, $numero_email){
 
         // Miramos si tiene adjuntos
@@ -196,7 +273,14 @@ class LeerEmails {
 
     } // function traer_adjuntos
 
-    // Decofica una cadena
+    /**
+     * Decofica una cadena
+     *
+     * @access protected
+     * @param int $encoding Tipo de codificación
+     * @param string $contenido Cadena de texto
+     * @return string Texto decodificado
+     */
     protected function decodificar ($encoding, $contenido){
 
         if ($encoding == 0) 
@@ -219,7 +303,13 @@ class LeerEmails {
 
     }
 
-    // Devuelve en texto el tipo 
+    /**
+     * Devuelve en texto el tipo 
+     *
+     * @access protected
+     * @param int $tipo Tipo de correo
+     * @return string Nombre del tipo
+     */
     protected function nombreTipo ($tipo){
 
         if($tipo == 0)
@@ -251,25 +341,30 @@ class LeerEmails {
 
     } // function nombreTipo
 
-    // Genera una cadena aleatorea
-    protected function cadenaAleatoria ($longitud){
+    /**
+     * Genera una cadena aleatorea de alfanumerica
+     *
+     * @access protected
+     * @param int $longitud Longitud de la cadena, es opcional, por defecto es de 10
+     * @return string Cadena aleatorea
+     */
+    protected function cadenaAleatoria ($longitud = 10){
 
-        // CODIGO PARA GENERAR UN KEY ALEATORIAMENTE
-        $carkey = "0123456789abcdefghijklmnopqrstuvwxyz";
+        $caracteres  = "0123456789abcdefghijklmnopqrstuvwxyz";
 
         // Iniciamos la semilla de numeros aleatorios y la key
         srand((double)microtime()*1000000);
-        $key = "";
+        $cadena = "";
 
-        // Creamos el Key de N caracteres;
+        // Creamos la cadena de N caracteres;
         for($x=0;$x<$longitud;$x++){
 
             $aleatorio = rand(0,35);
-            $key .=  substr($carkey, $aleatorio, 1);
+            $cadena .=  substr($caracteres, $aleatorio, 1);
 
         } // for($x=0;$x<$longitud;$x++)
 
-        return $key;
+        return $cadena;
 
     } // function cadenaAleatoria
 
