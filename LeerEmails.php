@@ -34,37 +34,45 @@ class LeerEmails {
     /**
      * Objeto de la conexión
      * @var object
+     * @access protected
      */
-    var $inbox;
+    protected $inbox;
     /**
      * Direccion del servidor
+     * @var string
+     * @access protected
      */
-    var $servidor;
+    protected $servidor;
     /**
      * Usuario de la cuenta
      * @var string
+     * @access protected
      */
-    var $usuario;
+    protected $usuario;
     /**
      * Contraseña de la cuenta
      * @var string
+     * @access protected
      */
-    var $clave;
+    protected $clave;
     /**
      * Criterio para la busqueda de correo
      * @var string
+     * @access protected
      */
-    var $criterioBusqueda;
+    protected $criterioBusqueda;
     /**
      * Carpeta temporal donde almacenar los adjuntos
      * @var string
+     * @access protected
      */
-    var $carpetaTemporal;
+    protected $carpetaTemporal;
     /**
      * Limite del tamaño de los ficheros a coger
      * @var int
+     * @access protected
      */
-    var $limiteFicheros;
+    protected $limiteFicheros;
 
     /**
      * Constructor
