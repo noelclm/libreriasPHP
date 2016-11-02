@@ -1,16 +1,15 @@
 <?php
 
 /**
- * @file AccesoDatos.php
+ * Conectar a una BBDD con PHP
+ *
  * @version 1.0
  * @author noelclm (https://github.com/noelclm)
- * @date   24-Septiembre-2016
- * @url    https://github.com/noelclm/libreriasPHP/AccesoDatos.php
- * @description Conectar a una BBDD con PHP
+ * @link https://github.com/noelclm/libreriasPHP/AccesoDatos.php
  */
 
 //-------------------------------------------------------------------
-// Definiciones
+// Definiciones (Datos para conectarse al servidor)
 //-------------------------------------------------------------------
 
 define("SERVIDOR", "servidor");
@@ -23,7 +22,12 @@ define("CODIFICACION", "utf8");
 // Funciones para interacturar con la base de datos
 //-------------------------------------------------------------------
 
-// Consulta en la base de datos y devuelve un array con los resultados
+/**
+ * Consulta en la base de datos y devuelve un array con los resultados
+ *
+ * @param string $sql Select que se quiere lanzar
+ * @return array Array con las lineas devueltas
+ */
 function consultaSQL ($sql){
     
     $resultado = array();
@@ -40,7 +44,12 @@ function consultaSQL ($sql){
     
 } // function consultSQL
 
-// Modifica una entrada en la base de datos y devuelve true o false si da error
+/**
+ * Modifica una entrada en la base de datos
+ *
+ * @param string $sql Update que se quiere lanzar
+ * @return boolean True si se ha realizado, false en caso contrario
+ */
 function modificarSQL ($sql){
     
     $bd = new AccesoDatos();
@@ -53,7 +62,12 @@ function modificarSQL ($sql){
 
 } // function modificarSQL
 
-// Inserta una nueva entrada en la base de datos y devuelve el id de la entrada o false si da error
+/**
+ * Inserta una nueva entrada en la base de datos
+ *
+ * @param string $sql Insert que se quiere lanzar
+ * @return mixe ID del dato insertado si se ha realizado, false en caso contrario
+ */
 function insertarSQL ($sql){
     
     $bd = new AccesoDatos();
@@ -70,7 +84,12 @@ function insertarSQL ($sql){
 
 } // function insertarSQL
 
-// Elimina una entrada en la base de datos y devuelve true o false si da error
+/**
+ * Elimina una entrada en la base de dato
+ *
+ * @param string $sql Delete que se quiere lanzar
+ * @return boolean True si se ha realizado, false en caso contrario
+ */
 function borrarSQL ($sql){
     
     $bd = new AccesoDatos();
@@ -89,10 +108,28 @@ function borrarSQL ($sql){
 
 class AccesoDatos {
 
+    /**
+     * Objeto de la conexión
+     */
     var $bd;
+    /**
+     * Objeto devuelto tras realizar la ejecución de una query
+     */
     var $query;
     
-    // Crea una conexion a la base de datos
+    /**
+     * Constructor
+     *
+     * Establece una conexión con la base de datos mediante mysqli
+     *
+     * @param string $servidor Dirección del servidor
+     * @param string $usuario Usuario del servidor
+     * @param string $clave Contraseña del servidor
+     * @param string $bd Base de datos del servidor
+     * @param string $codificacion Tipo de codificación del servidor
+     * @global object $bd
+     * @global object $query
+     */
     function __construct ($servidor = SERVIDOR, $usuario = USUARIO, $clave = CLAVE, $bd = BASEDEDATOS, $codificacion = CODIFICACION){
 
         $this->bd = new mysqli($servidor, $usuario, $clave, $bd);
@@ -100,7 +137,14 @@ class AccesoDatos {
 
     } // function __construct
 
-    // Ejecuta una consulta
+    /**
+     * Ejecuta una consulta
+     *
+     * @param string $sql Query a lanzar
+     * @global object $bd
+     * @global object $query
+     * @return boolean True si se ha podido lanzar, false en caso contrario
+     */
     function ejecutar ($sql){
 
         if( ($this->query = $this->bd->query($sql)) === false )
@@ -111,7 +155,12 @@ class AccesoDatos {
 
     } // function ejecutar
 
-    // Devuelve el siguiente resultado de la consulta
+    /**
+     * Devuelve el siguiente resultado de la consulta
+     *
+     * @global object $query
+     * @return mixe Array con los valores de la siguiente fila si quedan filas, false en caso contrario
+     */
     function sigFila (){  
 
         if ( $fila = $this->query->fetch_assoc())
@@ -121,14 +170,23 @@ class AccesoDatos {
 
     } // function sigFila
     
-    // Devuelve el ultimo id insertado
+    /**
+     * Devuelve el ultimo id insertado
+     *
+     * @global object $bd
+     * @return int ID del ultimo insert que se realizó
+     */
     function ultimoId (){
         
         return mysqli_insert_id($this->bd);
         
     } // function ultimoId
     
-    // Cierra la conexion
+    /**
+     * Cierra la conexión con la base de datos
+     *
+     * @global object $bd
+     */
     function cerrar (){
         
         mysqli_close($this->bd);
