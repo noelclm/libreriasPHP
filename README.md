@@ -8,5 +8,6 @@
   
     - Recortar texto sin cortar palabras
     - Crear una cadena aleatorea
+    - Convierte <br> en nl
 
 · WooCommerce_Curl.php (Libreria con funciones para conectarse a un WooCommerce mediante CURL)
