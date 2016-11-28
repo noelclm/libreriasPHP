@@ -3,7 +3,7 @@
 /**
  * Funciones utiles en PHP
  *
- * @version 1.0
+ * @version 1.1
  * @author noelclm (https://github.com/noelclm)
  * @url https://github.com/noelclm/libreriasPHP/Funciones.php
  */
@@ -71,5 +71,17 @@ function cadenaAleatorea ($longitud = 10) {
     return $cadena; 
     
 } // function cadenaAleatorea
+
+/**
+ * Convierte <br> en nl
+ *
+ * @param string Cadena a convertir
+ * @return string Cadena transformada
+ */
+function br2nl($cadena) {
+    
+    return preg_replace('/\<br(\s*)?\/?\>/i', "\n", $cadena);
+    
+} // function br2nl
 
 ?>
