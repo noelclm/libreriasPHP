@@ -47,7 +47,7 @@ function contarWooCommerce($ruta){
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, SSL_VERIFYPEER);
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, SSL_VERIFYHOST);
-    curl_setopt($curl, CURLOPT_URL, PAGINA_WOOCOMERCE_SSL."/wc-api/".VERSION."/".$ruta."/count");
+    curl_setopt($curl, CURLOPT_URL, URL."/wc-api/".VERSION."/".$ruta."/count");
     curl_setopt($curl, CURLOPT_USERPWD, CK.":".CS);
     curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: application/json;"));
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, RETURNTRANSFER);
