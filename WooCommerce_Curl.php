@@ -3,13 +3,15 @@
 /**
  * Funciones para conectarse a un WooCommerce mediante CURL
  *
- * @version 1.1
+ * @version 1.5
  * @author noelclm (https://github.com/noelclm)
  * @link https://github.com/noelclm/libreriasPHP/WooCommerce_Curl.php
  */
 
 /*
+
 // Ejemplos
+$num = contarWooCommerce("products");
 
 $categorias = obtenerWooCommerce("products/categories");
 
@@ -32,6 +34,35 @@ define("CS", "CONSUMER_SECRET");
 define("SSL_VERIFYPEER", false);
 define("SSL_VERIFYHOST", false);
 define("RETURNTRANSFER", true);
+define("VERSION", "v3");
+
+/**
+ * Obtiene el numero de elementos de la ruta del WooCommerce que indique
+ *
+ * @param string $ruta Ruta del WooCommerce
+ * @return int Número de elementos
+ */
+function contarWooCommerce($ruta){
+
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+    curl_setopt($curl, CURLOPT_URL, PAGINA_WOOCOMERCE_SSL."/wc-api/".VERSION."/".$ruta."/count");
+    curl_setopt($curl, CURLOPT_USERPWD, CK.":".CS);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: application/json;"));
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, RETURNTRANSFER);
+
+    $resultados = curl_exec($curl); 
+
+    if (curl_errno($curl)) 
+            print_r("Error: " . curl_error($curl)); 
+    
+    curl_close($curl); 
+
+    $resultados = json_decode($resultados);
+
+    return $resultados->count;
+}
 
 /**
  * Obtiene los datos de la ruta del WooCommerce que indique
@@ -44,7 +75,7 @@ function obtenerWooCommerce($ruta){
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, SSL_VERIFYPEER);
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, SSL_VERIFYHOST);
-    curl_setopt($curl, CURLOPT_URL, URL."/wc-api/v3/".$ruta);
+    curl_setopt($curl, CURLOPT_URL, URL."/wc-api/".VERSION."/".$ruta);
     curl_setopt($curl, CURLOPT_USERPWD, CK.":".CS);
     curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: application/json;"));
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, RETURNTRANSFER);
@@ -77,7 +108,7 @@ function crearWooCommerce($ruta,$datos){
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, SSL_VERIFYPEER);
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, SSL_VERIFYHOST);
     curl_setopt($curl, CURLOPT_POST, true); 
-    curl_setopt($curl, CURLOPT_URL, URL."/wc-api/v3/".$ruta);
+    curl_setopt($curl, CURLOPT_URL, URL."/wc-api/".VERSION."/".$ruta);
     curl_setopt($curl, CURLOPT_USERPWD, CK.":".CS);
     curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: application/json;"));
     curl_setopt($curl, CURLOPT_POSTFIELDS, $datos);
@@ -109,7 +140,7 @@ function borrarWooCommerce($ruta,$id){
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, SSL_VERIFYPEER);
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, SSL_VERIFYHOST);
     curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE'); 
-    curl_setopt($curl, CURLOPT_URL, URL."/wc-api/v3/".$ruta."/".$id);
+    curl_setopt($curl, CURLOPT_URL, URL."/wc-api/".VERSION."/".$ruta."/".$id);
     curl_setopt($curl, CURLOPT_USERPWD, CK.":".CS);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, RETURNTRANSFER);
 
@@ -119,8 +150,6 @@ function borrarWooCommerce($ruta,$id){
             print_r("Error: " . curl_error($curl)); 
     
     curl_close($curl); 
-
-    $resultados = json_decode($resultados);
     
     return $resultados;
     
@@ -142,7 +171,7 @@ function actualizarWooCommerce($ruta,$id,$datos){
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, SSL_VERIFYPEER);
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, SSL_VERIFYHOST);
     curl_setopt($curl, CURLOPT_POST, true); 
-    curl_setopt($curl, CURLOPT_URL, URL."/wc-api/v3/".$ruta."/".$id);
+    curl_setopt($curl, CURLOPT_URL, URL."/wc-api/".VERSION."/".$ruta."/".$id);
     curl_setopt($curl, CURLOPT_USERPWD, CK.":".CS);
     curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: application/json;"));
     curl_setopt($curl, CURLOPT_POSTFIELDS, $datos);
