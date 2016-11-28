@@ -132,7 +132,7 @@ function crearWooCommerce($ruta,$datos){
  *
  * @param string $ruta Ruta del WooCommerce
  * @param int $id ID del dato a borrar
- * @return object El objeto eliminado
+ * @return string Mensage del servidor
  */
 function borrarWooCommerce($ruta,$id){
 
@@ -151,7 +151,9 @@ function borrarWooCommerce($ruta,$id){
     
     curl_close($curl); 
     
-    return $resultados;
+    $resultados = json_decode($resultados);
+
+    return $resultados->message;
     
 } // borrarWooCommerce($ruta,$id)
 
