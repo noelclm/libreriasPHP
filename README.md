@@ -9,5 +9,7 @@
     - Recortar texto sin cortar palabras
     - Crear una cadena aleatorea
     - Convierte <br> en nl
+    - Busca los ficheros de un directorio de forma recursiva
+    - Saca el Mime-Content-Type de un fichero
 
 · WooCommerce_Curl.php (Libreria con funciones para conectarse a un WooCommerce mediante CURL)
