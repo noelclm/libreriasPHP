@@ -116,7 +116,7 @@ function directorio2Array ($directorio) {
                     // Si es un archivo guardamos los datos
                     $tamanyo = filesize($directorio. "/".$valor);
                     $tipo = tipo_mime($valor); // Funcion declarada en este fichero
-                    $resultado[] = array("ruta" => $directorio. "/".$valor,
+                    $resultado[] = array("ruta" => $directorio,
                                          "nombre" => $valor,
                                          "tipo" => $tipo,
                                          "tamanyo" => $tamanyo); 
@@ -142,6 +142,7 @@ function tipo_mime($nombreArchivo) {
 
     $tipo_mime = array(
 
+        // textos
         'txt' => 'text/plain',
         'htm' => 'text/html',
         'html' => 'text/html',
@@ -153,7 +154,7 @@ function tipo_mime($nombreArchivo) {
         'swf' => 'application/x-shockwave-flash',
         'flv' => 'video/x-flv',
 
-        // images
+        // imagenes
         'png' => 'image/png',
         'jpe' => 'image/jpeg',
         'jpeg' => 'image/jpeg',
@@ -166,7 +167,7 @@ function tipo_mime($nombreArchivo) {
         'svg' => 'image/svg+xml',
         'svgz' => 'image/svg+xml',
 
-        // archives
+        // archivos
         'zip' => 'application/zip',
         'rar' => 'application/x-rar-compressed',
         'exe' => 'application/x-msdownload',
@@ -194,6 +195,7 @@ function tipo_mime($nombreArchivo) {
         // open office
         'odt' => 'application/vnd.oasis.opendocument.text',
         'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
+        
     ); // array
 
     $ext = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
