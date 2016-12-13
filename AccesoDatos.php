@@ -17,6 +17,7 @@ define("USUARIO", "usuario");
 define("CLAVE", "clave");
 define("BASEDEDATOS", "bdd");
 define("CODIFICACION", "utf8");
+define("PERSISTENTE", false);
 
 //-------------------------------------------------------------------
 // Funciones para interacturar con la base de datos
@@ -34,7 +35,7 @@ function consultaSQL ($sql){
     $bd = new AccesoDatos();
     $bd->ejecutar($sql);
     
-    while(($fila = $bd->sigFila()) !== false )
+    while(($fila = $bd->sigFila()) !== false)
         $resultado[] = $fila;
  
     $bd->cerrar();
@@ -126,6 +127,7 @@ class AccesoDatos {
      *
      * Establece una conexión con la base de datos mediante mysqli
      *
+     * @param boolean $persistente Si la conexion esta marcada como persistente o no
      * @param string $servidor Dirección del servidor
      * @param string $usuario Usuario del servidor
      * @param string $clave Contraseña del servidor
@@ -134,7 +136,11 @@ class AccesoDatos {
      * @global object $bd
      * @global object $query
      */
-    function __construct ($servidor = SERVIDOR, $usuario = USUARIO, $clave = CLAVE, $bd = BASEDEDATOS, $codificacion = CODIFICACION){
+    function __construct ($persistente = PERSISTENTE, $servidor = SERVIDOR, $usuario = USUARIO, $clave = CLAVE, $bd = BASEDEDATOS, $codificacion = CODIFICACION){
+
+        // Si esta marcado para que la conexion sea persistente se pone
+        if($persistente) $p = "p:";
+        else $p = "";
 
         $this->bd = new mysqli($servidor, $usuario, $clave, $bd);
         $this->bd->set_charset($codificacion);
@@ -151,7 +157,7 @@ class AccesoDatos {
      */
     function ejecutar ($sql){
 
-        if( ($this->query = $this->bd->query($sql)) === false )
+        if(($this->query = $this->bd->query($sql)) === false)
             return false;
         else 
             return true;
@@ -167,7 +173,7 @@ class AccesoDatos {
      */
     function sigFila (){  
 
-        if ( $fila = $this->query->fetch_assoc())
+        if($fila = $this->query->fetch_assoc())
             return $fila;
         else
             return false;
