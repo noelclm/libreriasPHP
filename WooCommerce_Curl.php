@@ -25,6 +25,9 @@ borrarWooCommerce("products/categories",$id);
 $datos = array( "product" => array( 'title' => "Titulo", 'description' => "Descripcion", 'sku' => Referencia , 'categories' => array( 'id' => $idCategoria)));
 createWooCommerce("products",$datos);
 
+// Se puede habilitar las etiquetas html en la descripcion de esta forma
+$datos = array( "product" => array( 'enable_html_description' => true, 'title' => "Titulo", 'description' => "Descripcion", 'sku' => Referencia , 'categories' => array( 'id' => $idCategoria)));
+
 */
 
 // Datos para conectarse al servidor

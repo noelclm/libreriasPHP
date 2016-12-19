@@ -15,7 +15,7 @@
  * @param int $numMaxCaract Numero maximo de caracteres
  * @return string Texto recortado
  */
-function cortarTexto ($texto, $numMaxCaract) {
+function cortarTexto ($texto, $numMaxCaract){
     
     // Si el tamaño del texto no excede el numero maximo de caracteres
     if(strlen($texto) <  $numMaxCaract)
@@ -53,7 +53,7 @@ function cortarTexto ($texto, $numMaxCaract) {
  * @param int $longitud Longitud de la cadena, es opcional, por defecto es de 10
  * @return string Cadena aleatorea
  */
-function cadenaAleatorea ($longitud = 10) {
+function cadenaAleatorea ($longitud = 10){
 
     $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     // Iniciamos la semilla de numeros aleatorios y la key
@@ -73,12 +73,12 @@ function cadenaAleatorea ($longitud = 10) {
 } // function cadenaAleatorea
 
 /**
- * Convierte <br> en nl
+ * Convierte <br> o <br /> en nl
  *
  * @param string Cadena a convertir
  * @return string Cadena transformada
  */
-function br2nl ($cadena) {
+function br2nl ($cadena){
     
     return preg_replace('/\<br(\s*)?\/?\>/i', "\n", $cadena);
     
@@ -90,7 +90,7 @@ function br2nl ($cadena) {
  * @param string Directorio
  * @return array Datos de los ficheros
  */
-function directorio2Array ($directorio) { 
+function directorio2Array ($directorio){ 
    
     $resultado = array(); 
 
@@ -138,7 +138,7 @@ function directorio2Array ($directorio) {
  * @param string Nombre del archivo
  * @return string Content-type
  */
-function tipo_mime($nombreArchivo) {
+function tipo_mime ($nombreArchivo){
 
     $tipo_mime = array(
 
@@ -206,5 +206,17 @@ function tipo_mime($nombreArchivo) {
         return 'application/octet-stream';
     
 } // function tipo_mime
+
+/**
+ * Cambia el codigo para evitar insercion de codigo
+ *
+ * @param string Cadena a comprobar
+ * @return string Devuelve la cadena transformando el codigo
+ */
+function escaparCodigo ($cadena){
+    
+    return addslashes(htmlspecialchars($cadena));
+    
+} // function escaparCodigo
 
 ?>
