@@ -35,8 +35,9 @@ function consultaSQL ($sql){
     $bd = new AccesoDatos();
     $bd->ejecutar($sql);
     
-    while(($fila = $bd->sigFila()) !== false)
+    while(($fila = $bd->sigFila()) !== false){
         $resultado[] = $fila;
+    }
  
     $bd->cerrar();
     unset($bd);
@@ -73,10 +74,11 @@ function insertarSQL ($sql){
     
     $bd = new AccesoDatos();
     
-    if($bd->ejecutar($sql))
+    if($bd->ejecutar($sql)){
         $resultado = $bd->ultimoId();
-    else
+    }else{
         $resultado = false;
+    }
  
     $bd->cerrar();
     unset($bd);
@@ -139,8 +141,8 @@ class AccesoDatos {
     function __construct ($persistente = PERSISTENTE, $servidor = SERVIDOR, $usuario = USUARIO, $clave = CLAVE, $bd = BASEDEDATOS, $codificacion = CODIFICACION){
 
         // Si esta marcado para que la conexion sea persistente se pone
-        if($persistente) $p = "p:";
-        else $p = "";
+        if($persistente){ $p = "p:"; }
+        else{ $p = ""; }
 
         $this->bd = new mysqli($servidor, $usuario, $clave, $bd);
         $this->bd->set_charset($codificacion);
@@ -157,11 +159,11 @@ class AccesoDatos {
      */
     function ejecutar ($sql){
 
-        if(($this->query = $this->bd->query($sql)) === false)
+        if(($this->query = $this->bd->query($sql)) === false){
             return false;
-        else 
+        }else{
             return true;
-        
+        }
 
     } // function ejecutar
 
@@ -173,10 +175,11 @@ class AccesoDatos {
      */
     function sigFila (){  
 
-        if($fila = $this->query->fetch_assoc())
+        if($fila = $this->query->fetch_assoc()){
             return $fila;
-        else
+        }else{
             return false;
+        }
 
     } // function sigFila
     

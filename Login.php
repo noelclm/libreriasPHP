@@ -98,7 +98,7 @@ class Login {
      */
     function comprobarLogin (){
 
-        if(!isset($_SESSION['Login'])) $_SESSION['Login'] = false;
+        if(!isset($_SESSION['Login'])){ $_SESSION['Login'] = false; }
 
         // Borra las sesiones que han caducado
         borrarSesionesAntiguas();
@@ -119,8 +119,9 @@ class Login {
 
         // Si esta logueado mira si ha expirado la sesion
         if($_SESSION['Login']){
-            if(!comprobarSesion())
+            if(!comprobarSesion()){
                 return 1004;
+            }
         }else{
             return 1005
         }
@@ -130,8 +131,9 @@ class Login {
         if(isset($_POST['login']) && $_POST['login'] === true && isset($_POST['Usuario']) && isset($_POST['clave'])){
 
             // Si no esta marcado para que se guarde la sesion
-            if(!isset($_POST['guardarSesion'])) 
+            if(!isset($_POST['guardarSesion'])){
                 $_POST['guardarSesion'] = false;
+            }
 
             // Revisa si va codigo en los datos de entrada
             $usuario = escaparCodigo($_POST['Usuario']);
@@ -159,8 +161,9 @@ class Login {
      */
     protected function borrarSesionesAntiguas (){
         
-        if(isset($_SESSION['Key']))
+        if(isset($_SESSION['Key'])){
             borrarSQL("DELETE FROM sesion WHERE ultimaactividad + ". TIEMPO_LOGIN ." < " . time() . ";"); 
+        }
 
     } // function borrarSesionesAntiguas
 
@@ -259,8 +262,9 @@ class Login {
                 } // if($save)
                 
                 // Si no deja varias sesiones a la vez por usuario borra las anteriores
-                if(!VARIAS_SESIONES)
+                if(!VARIAS_SESIONES){
                     borrarSQL("DELETE FROM `sesion` WHERE `idusuario` = '".$_SESSION['IDUsuario']."';");
+                }
 
                 insertarSQL("INSERT INTO `sesion` (`idusuario`,`key`,`activodesde`,`ultimaactividad`,`ip`) VALUES (".$_SESSION['IDUsuario'].",'".$_SESSION['Key']."',".$_SESSION['ActivoDesde'].",".$_SESSION['UltimaActividad'].",'".$_SESSION['DireccionIP']."');");
                 return true;
@@ -280,8 +284,9 @@ class Login {
      */
     protected function logOut (){
         
-        if(isset($_SESSION['Key']))
+        if(isset($_SESSION['Key'])){
             borrarSQL("DELETE FROM `sesion` WHERE `key` = '".$_SESSION['Key']."';");
+        }
 
         session_unset();
         session_destroy();
@@ -299,11 +304,13 @@ class Login {
      */
     protected function ipCliente (){
 
-        if (!empty($_SERVER['HTTP_CLIENT_IP']))
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])){
             return $_SERVER['HTTP_CLIENT_IP'];
+        }
 
-        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
             return $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
 
         return $_SERVER['REMOTE_ADDR'];
 

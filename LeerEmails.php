@@ -101,11 +101,11 @@ class LeerEmails {
         $this->limiteFicheros = 10485760; // en bytes
         
         // Conectamos al servidor de correo (Si falla hay que cambiar en php.ini ";extension=php_imap.dll" por "extension=php_imap.dll")
-        if(!($this->inbox = imap_open($servidor,$usuario,$clave)))
+        if(!($this->inbox = imap_open($servidor,$usuario,$clave))){
             return imap_last_error();
-
-        else
+        }else{
             return true;
+        }
         
         
     } // function __construct
@@ -128,9 +128,9 @@ class LeerEmails {
 
         if($opciones != '' && is_array($opciones)){
 
-            if(isset($opciones['criterioBusqueda'])) $this->criterioBusqueda = $opciones['criterioBusqueda'];
-            if(isset($opciones['carpetaTemporal'])) $this->carpetaTemporal = $opciones['carpetaTemporal'];
-            if(isset($opciones['limiteFicheros'])) $this->limiteFicheros = $opciones['limiteFicheros'];
+            if(isset($opciones['criterioBusqueda'])){ $this->criterioBusqueda = $opciones['criterioBusqueda']; }
+            if(isset($opciones['carpetaTemporal'])){ $this->carpetaTemporal = $opciones['carpetaTemporal']; }
+            if(isset($opciones['limiteFicheros'])){ $this->limiteFicheros = $opciones['limiteFicheros'];}
 
         } // if($opciones != '' && is_array($opciones))
 
@@ -157,12 +157,11 @@ class LeerEmails {
             $adjuntos = $this->traer_adjuntos($estructura,$numero_email);
 
             // Cogemos el cuerpo del mensaje sin marcarlo como leido
-            if($estructura->parts[0]->type == 0) // Si no tiene ficheros adjuntos
+            if($estructura->parts[0]->type == 0){ // Si no tiene ficheros adjuntos
                 $cuerpo = imap_utf8(imap_fetchbody($this->inbox,$numero_email,$tipo,FT_PEEK)); 
-            
-            else // Si tiene ficheros adjuntos
+            }else{ // Si tiene ficheros adjuntos
                 $cuerpo = imap_utf8(imap_fetchbody($this->inbox,$numero_email,$tipo.'.1',FT_PEEK)); 
-            
+            }
             
             // Decodificamos el cuerpo y el asunto
             $cuerpo = $this->decodificar($codificacion,$cuerpo);
@@ -291,23 +290,19 @@ class LeerEmails {
      */
     protected function decodificar ($encoding, $contenido){
 
-        if ($encoding == 0) 
+        if ($encoding == 0){ 
             return quoted_printable_decode($contenido);
-
-        elseif ($encoding == 1) 
+        }elseif ($encoding == 1){
             return imap_8bit($contenido);
-
-        elseif ($encoding == 2) 
+        }elseif ($encoding == 2){
             return imap_binary($contenido);
-
-        elseif ($encoding == 3)
+        }elseif ($encoding == 3){
             return imap_base64($contenido);
-
-        elseif ($encoding == 4) 
+        }elseif ($encoding == 4){
             return imap_qprint($contenido);
-
-        else
+        }else{
             return $contenidoFichero;
+        }
 
     }
 
@@ -320,32 +315,25 @@ class LeerEmails {
      */
     protected function nombreTipo ($tipo){
 
-        if($tipo == 0)
+        if($tipo == 0){
             return 'text';
-
-        elseif($tipo == 1)
+        }elseif($tipo == 1){
             return 'multipart';
-
-        elseif($tipo == 2)
+        }elseif($tipo == 2){
             return 'message';
-
-        elseif($tipo == 3)
+        }elseif($tipo == 3){
             return 'application';
-
-        elseif($tipo == 4)
+        }elseif($tipo == 4){
             return 'audio';
-
-        elseif($tipo == 5)
+        }elseif($tipo == 5){
             return 'image';
-
-        elseif($tipo == 6)
+        }elseif($tipo == 6){
             return 'video';
-
-        elseif($tipo == 7)
+        }elseif($tipo == 7){
             return 'model';
-
-        else
+        }else{
             return 'other';
+        }
 
     } // function nombreTipo
 

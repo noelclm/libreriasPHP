@@ -57,8 +57,9 @@ function contarWooCommerce($ruta){
 
     $resultados = curl_exec($curl); 
 
-    if (curl_errno($curl)) 
-            print_r("Error: " . curl_error($curl)); 
+    if (curl_errno($curl)){
+        print_r("Error: " . curl_error($curl)); 
+    }
     
     curl_close($curl); 
 
@@ -85,8 +86,9 @@ function obtenerWooCommerce($ruta){
 
     $resultados = curl_exec($curl); 
 
-    if (curl_errno($curl)) 
-            print_r("Error: " . curl_error($curl)); 
+    if (curl_errno($curl)){
+        print_r("Error: " . curl_error($curl)); 
+    }
     
     curl_close($curl); 
     
@@ -119,8 +121,9 @@ function crearWooCommerce($ruta,$datos){
 
     $resultados = curl_exec($curl); 
 
-    if (curl_errno($curl)) 
-            print_r("Error: " . curl_error($curl)); 
+    if (curl_errno($curl)){
+        print_r("Error: " . curl_error($curl)); 
+    }
     
     curl_close($curl); 
 
@@ -149,8 +152,9 @@ function borrarWooCommerce($ruta,$id){
 
     $resultados = curl_exec($curl); 
 
-    if (curl_errno($curl)) 
-            print_r("Error: " . curl_error($curl)); 
+    if (curl_errno($curl)){
+        print_r("Error: " . curl_error($curl)); 
+    }
     
     curl_close($curl); 
     
@@ -184,8 +188,9 @@ function actualizarWooCommerce($ruta,$id,$datos){
 
     $resultados = curl_exec($curl); 
 
-    if (curl_errno($curl)) 
-            print_r("Error: " . curl_error($curl)); 
+    if (curl_errno($curl)){
+        print_r("Error: " . curl_error($curl)); 
+    }
     
     curl_close($curl); 
 

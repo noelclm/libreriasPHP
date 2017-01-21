@@ -18,8 +18,9 @@
 function cortarTexto ($texto, $numMaxCaract){
     
     // Si el tamaño del texto no excede el numero maximo de caracteres
-    if(strlen($texto) <  $numMaxCaract)
+    if(strlen($texto) <  $numMaxCaract){
         $textoCortado = $texto;
+    }
     
     else{
         // Recortamos el texto
@@ -32,14 +33,16 @@ function cortarTexto ($texto, $numMaxCaract){
             
             $textoCortadoTmp = substr($textoCortado, 0, $ultimoEspacio);
             
-            if (substr($textoCortado, $ultimoEspacio))
+            if (substr($textoCortado, $ultimoEspacio)){
                 $textoCortadoTmp .= '...';
+            }
 
             $textoCortado = $textoCortadoTmp;
             
         } // if($ultimoEspacio !== false)
-        elseif(substr($texto, $numMaxCaract))
+        elseif(substr($texto, $numMaxCaract)){
             $textoCortado .= '...';  
+        }
         
     } // else
  
@@ -200,10 +203,11 @@ function tipo_mime ($nombreArchivo){
 
     $ext = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
     
-    if(array_key_exists($ext, $tipo_mime)) 
+    if(array_key_exists($ext, $tipo_mime)) {
         return $tipo_mime[$ext];
-    else 
+    }else{
         return 'application/octet-stream';
+    }
     
 } // function tipo_mime
 
