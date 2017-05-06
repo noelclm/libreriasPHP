@@ -123,7 +123,7 @@ class Login {
                 return 1004;
             }
         }else{
-            return 1005
+            return 1005;
         }
         
 
