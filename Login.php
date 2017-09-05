@@ -108,7 +108,7 @@ class Login {
         $this->deleteOldSession();
 
         // Si ha pulsado en logout
-        if(((isset($_GET['logOut']) && $_GET['logOut'] === true) || (isset($_POST['logOut']) && $_POST['logOut'] === true)) && (isset($_SESSION['Login']) && $_SESSION['Login'] === true)){
+        if(((isset($_GET['logout']) && $_GET['logout'] == true) || (isset($_POST['logout']) && $_POST['logout'] == true)) && (isset($_SESSION['login']) && $_SESSION['login'] == true)){
             $this->logOut();
             return 1003;
         }
